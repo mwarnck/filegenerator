@@ -1,7 +1,9 @@
 const fs = require('fs');
-module.exports = function writeFile(name) {
+module.exports = function writeFile(name, fileType) {
+  const fileName =
+    fileType === 'component' ? `./${name}.js` : `./${name}.${fileType}.js`;
   fs.writeFileSync(
-    `./${name}.js`,
+    fileName,
     `function ${name}() {
     
   }`

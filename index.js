@@ -11,7 +11,7 @@ inquirer
       type: 'checkbox',
       name: 'fileTypes',
       message: 'Which file types should be created? ',
-      choices: ['Component', 'Spec', 'Stories'],
+      choices: ['component', 'spec', 'stories'],
       validate: answer => {
         if (answer.length < 1) {
           return 'You have to select at least one type!';
@@ -22,7 +22,9 @@ inquirer
     },
   ])
   .then(answers => {
-    writeFile(answers.functionName);
+    answers.fileTypes.forEach(type => {
+      writeFile(answers.functionName, type);
+    });
   });
 
 // const readline = require('readline');
