@@ -1,13 +1,26 @@
 const writeFile = require('./writeFile.js');
+const inquirer = require('inquirer');
 
-const readline = require('readline');
-const { stdin: input, stdout: output } = require('process');
+inquirer
+  .prompt([
+    {
+      name: 'createFunctionFile',
+      message: 'What is the name of your function? ',
+      default: 'Function',
+    },
+  ])
+  .then(answers => {
+    writeFile(answers.createFunctionFile);
+  });
 
-const rl = readline.createInterface({ input, output });
+// const readline = require('readline');
+// const { stdin: input, stdout: output } = require('process');
 
-rl.question('What is the name of your function? ', answer => {
-  writeFile(answer);
-  console.log(answer);
+// const rl = readline.createInterface({ input, output });
 
-  rl.close();
-});
+// rl.question('What is the name of your function? ', answer => {
+//   writeFile(answer);
+//   console.log(answer);
+
+//   rl.close();
+// });
