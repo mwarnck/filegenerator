@@ -4,13 +4,25 @@ const inquirer = require('inquirer');
 inquirer
   .prompt([
     {
-      name: 'createFunctionFile',
+      name: 'functionName',
       message: 'What is the name of your function? ',
-      default: 'Function',
+    },
+    {
+      type: 'checkbox',
+      name: 'fileTypes',
+      message: 'Which file types should be created? ',
+      choices: ['Component', 'Spec', 'Stories'],
+      validate: answer => {
+        if (answer.length < 1) {
+          return 'You have to select at least one type!';
+        } else {
+          return true;
+        }
+      },
     },
   ])
   .then(answers => {
-    writeFile(answers.createFunctionFile);
+    writeFile(answers.functionName);
   });
 
 // const readline = require('readline');
